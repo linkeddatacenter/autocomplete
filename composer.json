@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php": ">=5.5",
+        "botk/core": "*",
+        "botk/context": "*",
+    	"botk/rdf": "*"
+    }
+}

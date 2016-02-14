@@ -1,0 +1,83 @@
+@prefix kees: <http://linkeddata.center/kees/v1#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+#######################################################
+# WHAT IS THIS?
+#######################################################
+<> 	dct:title "Knowledge base description for autocomplete demo project"@en ;
+	dct:description "A sharable description of a knowledge base that contains names of things (Automobiles, Rivers, Mammals etc) useful to add autocomple feature to form." ;
+	dct:conformsTo <http://linkeddata.center/kees> ;
+	dct:subject <https://en.wikipedia.org/wiki/Autocomplete> ;
+	dct:license <http://creativecommons.org/licenses/by-sa/3.0/>;
+	dct:isVersionOf <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> ;
+	foaf:primaryTopic [ a kees:KnowledgeBase;
+		kees:hasAccrualPolicy _:a1, _:a2 ;
+		kees:hasView _:v1
+	]
+.
+
+
+#######################################################
+# TBOX (schema) accrual policy:
+# not really necessary but clean
+#######################################################
+_:a1	
+	kees:queryName <http://dbpedia.org/ontology> ;
+	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
+	kees:constructQuery """
+		PREFIX dbo: <http://dbpedia.org/ontology/>
+	    DESCRIBE ?class WHERE { VALUES ?class { dbo:Automobile dbo:River dbo:Mammal }  }
+	""" ;
+	kees:onFetchingError _:tryFourTimes ; kees:updateFrequency _:yearly ;
+.
+
+
+#######################################################
+# ABOX accrual policy:
+# here you describe whath and how to grab from dbpedia
+#######################################################
+_:a2 
+	kees:queryName <urn:autocomplete:dbpedia> ;
+	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
+	kees:generatesGraphType kees:TBoxGraph ;
+	kees:constructQuery """
+		PREFIX dbo: <http://dbpedia.org/ontology/>
+		CONSTRUCT { ?url a ?class ; rdfs:label ?name }
+		WHERE { 
+			VALUES ?class { dbo:Automobile dbo:River dbo:Mammal }
+			?url a ?class; rdfs:label ?name 
+		}  
+	""" ;
+	kees:pageSize 5000 ; kees:toPage 100 ;
+	kees:onFetchingError _:tryFourTimes ; kees:updateFrequency _:montly ;
+.
+
+	
+##########################################################
+# Knowledge fragments
+##########################################################
+_:v1 
+	a kees:Table ;
+	dct:identifier "autocomplete:labels" ;
+	rdfs:label "Names for autocomplention from dbpedia ontology " ;
+	rdfs:comment "Accepts parameters DBO=Automobile|River|Mammal LANG=en, MATCH=.*, LIMIT=5" ;
+	kees:queryText """
+		PREFIX dbo: <http://dbpedia.org/ontology/>
+		SELECT  ?label ?url FROM <urn:autocomplete:dbpedia>
+		WHERE { 
+			?url a dbo:%DBO=Automobile%; rdfs:label ?label
+			FILTER(LANGMATCHES(LANG(?label), '%LANG=en%') && REGEX(?label, '^%MATCH=.*%','i'))
+		} LIMIT %LIMIT=5%
+	"""
+.
+
+
+_:yearly kees:hasFrequencyPeriod 31104000 .
+_:montly kees:hasFrequencyPeriod 2592000 .
+_:tryFourTimes kees:hasResilience 4 .
+
+## Debug:
+#[] kees:includes <http://linkeddata.center/knowledge/introspection.ttl> .

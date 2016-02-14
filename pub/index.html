@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete - demo</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/doc.css">
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("images/animation.gif") right center no-repeat;
+  }
+  </style>
+  <script>
+	$(function() {
+		var cache = {};
+		
+		function byClass(request, response, theClass){
+	        var cacheKey = request.term+theClass;
+	        if ( cacheKey in cache ) {
+	          response( cache[ cacheKey ] );
+	          return;
+	        }
+	 
+	        $.getJSON( "api?lang=en&class="+theClass, request, function( data, status, xhr ) {
+	          cache[ cacheKey ] = data;
+	          response( data );
+	        });
+		}
+		
+		$( "#river" ).autocomplete({minLength: 2,source: function( request, response ) { byClass(request, response, 'River');}});
+		$( "#automobile" ).autocomplete({minLength: 2,source: function( request, response ) { byClass(request, response, 'Automobile');}});
+		$( "#mammal" ).autocomplete({minLength: 2,source: function( request, response ) { byClass(request, response, 'Mammal');}});
+	});
+  </script>
+</head>
+<body>
+<h1>Autocomplete demo</h1>
+<p>
+    This simple demo shows how to build an autocomplete field that displays elements from a list
+    extracted from dbpedia by <a href="http://linkeddata.center/"> LinkedData.Center ingestion Apis</a>.<br>
+    View project in <a href="https://github.com/linkeddatacenter/autocomplete">GitHub repository</a>.
+</p>
+<hr>
+<h3>Try the jQuery integration:</h3>
+<div class="ui-widget">
+  <label for="river">River: </label><br>
+  <input id="river"> try typing "rio"
+</div>
+
+<div class="ui-widget">
+  <label for="automobile">Automobile: </label><br>
+  <input id="automobile"> try typing "fia"
+</div>
+
+<div class="ui-widget">
+  <label for="mammal">Mammal: </label><br>
+  <input id="mammal"> try typing "dol"
+</div>
+
+<hr>
+<h3>Try the api interface:</h3>
+<form action="api" method="get">
+	api?lang=<input name="lang" value="en"/>
+	&amp;term=<input name="term" value="am"/>
+	&amp;class=<input name="class" value="River"/>
+	&amp;<input name="limit" value="20"/>
+	<input type="submit"/>
+</form>
+
+<hr>
+<h3>Try the data interface: (username:demo password:demo)</h3>
+<ul>
+	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=River&LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&amp;LIMIT=100</a></li>
+
+	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Mammals&LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&amp;LIMIT=100</a></li>
+
+	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&amp;LIMIT=100</a></li>
+	<li><a href="kees.ttl">Show knowledge base configuration</a></li>
+</ul>
+</body>
+</html>
