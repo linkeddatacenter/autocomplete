@@ -18,25 +18,26 @@ in different languages. You got a big problem: to populate and maintain the big 
 Here is where the Semantic Web does the magic: you can use [Dbpedia](http://dbpedia.org) to access the full "Wisdom of the crowd" contained in Wikipedia and use it
 	to get a list of all rivers, translated in any language!
 
-Unfortunately dbpedia is a great public service but it does non ensure any SLA, the performaces are unpredictable and
-	very often the service is down for maintenance and you can't know when this happens.
-	This is not acceptable if you want to build a solid application based directly on such service.
+Dpedia is a great public service but unfortunately it does't ensure SLA, 
+	sometime the service is down for maintenance and you can't predict when this happens.
+	This is not acceptable if you need to build a solid application based directly on such service.
 
 A reasonable solution is to copy the data you need from dbpedia to your own knowlege base system, so you can safely use it in your application. 
 
-This is where [linkeddata.center](http://linkeddata.center/) service plays its role.
-	It allows you to quicly create and host a knoledge base populated from linked open data sources, from  private data or from any combination of both.
-	LinkedData.Centers exposes a dedicated and password protected [sparql end-point](http://www.w3.org/TR/sparql11-query/) 
-	full compliant with the last [W3C semantic web standards](http://www.w3.org/standards/semanticweb/).
-	You can create data mashup, apply rules, data inferences and many other features. 
-	Last but not least LinkedData.Center keeps aligned your knowledge base with the data sources reindexing when needed.
+This is where [linkeddata.center](http://linkeddata.center/) service plays its role. It allows you to quickly create and host a knowledge base populated 
+from linked open data sources, from private data or from any combination of both. LinkedData.Centers exposes a dedicated and password protected sparql 
+end-point full compliant with the last W3C semantic web standards. You can create data mashup, apply rules, 
+data inferences and many other features. Last but not least LinkedData.Center keeps aligned your knowledge 
+base with the data sources reindexing when needed.
 
-This project, by default, connects to the  **demo** knowledge base that is available at https://hub1.linkeddata.center/demo/sparql endpoint.
+This project is composed by javascript/html page and a server script.
+
+The  script, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
 You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
 
 
-The *demo* knoledge base is populated starting form a very simple configuration contained in the
-[Knowledge Exchange Engine Schema (KEES) file](pub/kees.ttl).
+The *demo* knoledge base is populated starting from a 
+[Knowledge Exchange Engine Schema (KEES) file](pub/kees.ttl). This file is the core of the project.
 For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://sites.linkeddata.center/help/devop/kees-profile). 
 
 ## Test in a local environment using Vagrant (suggested)
@@ -46,8 +47,8 @@ These instructions allow you to install and test the project on your local works
 - install [vagrant](https://docs.vagrantup.com/v2/installation/) and [virtual box](https://www.virtualbox.org/) on your workstation.
 - clone this project in directory of your workstation and cwd in it
 - open a shell and type the command `vagrant up`. A new virtual machine with all needed tools will be ready and running in few minutes.
-- point your browser to http://localhosts:8080/demo to call your first demo api.
-- to destroy your virtual host just type `vagrant destroy` in shell windows
+- point your browser to http://localhosts:8080/demo .
+- to destroy your virtual host just type `vagrant destroy`
 
 You should get locally the same results available in [E-Artspace demo site](http://autocomplete.linkeddata.center/).
  
@@ -118,6 +119,5 @@ I have to thank a *lot* of awesome open source projects that were suggested by [
 And, of course, PHP and JQuery community.
 
 ## License
-This project is licensed under the MIT licens, see here for the full license in LICENSE file.
-Find details and licenses of embedded software in the Vendor directory that will be created doring deploy process.
+This project is licensed under the MIT license, in LICENSE file.
 
