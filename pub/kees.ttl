@@ -1,7 +1,6 @@
 #######################################################################################
-# To  import thi knowledge piece in your LinkedData.Center the graph database instance
-# add following line to the configuration:
-#######################################################################################
+# Add following line to the configuration of your LinkedData.Center graph db
+# to import last available  knowledge  description
 #[] kees:includes <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> .
 #######################################################################################
 
@@ -15,7 +14,7 @@
 # WHAT IS THIS?
 #######################################################
 <> 	dct:title "Knowledge base description for autocomplete demo project"@en ;
-	dct:description "A sharable description of a knowledge base that contains names of things (Automobiles, Rivers, Mammals etc) useful to add autocomple feature to form." ;
+	dct:description "A sharable description of a knowledge base that contains names of things (Automobiles, Rivers, Mammals etc) useful to add autocomple feature to form."@en ;
 	dct:isVersionOf <http://linkeddata.center/project/autocomplete/1.0.0/pub/kees.ttl> ;
 	dct:conformsTo <http://linkeddata.center/kees> ;
 	dct:subject <https://en.wikipedia.org/wiki/Autocomplete> ;
@@ -85,6 +84,3 @@ _:v1
 _:yearly kees:hasFrequencyPeriod 31104000 .
 _:montly kees:hasFrequencyPeriod 2592000 .
 _:tryFourTimes kees:hasResilience 4 .
-
-## Debug:
-#[] kees:includes <http://linkeddata.center/knowledge/introspection.ttl> .

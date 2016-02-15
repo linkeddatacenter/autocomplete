@@ -25,15 +25,17 @@ Unfortunately dbpedia is a great public service but it does non ensure any SLA, 
 A reasonable solution is to copy the data you need from dbpedia to your own knowlege base system, so you can safely use it in your application. 
 
 This is where [linkeddata.center](http://linkeddata.center/) service plays its role.
-	It allows you to quicly create and host a knoledge base populated from Linked Open Data, from  private data or from any combination of both. In this project we use just dbpedia.
+	It allows you to quicly create and host a knoledge base populated from linked open data sources, from  private data or from any combination of both.
 	LinkedData.Centers exposes a dedicated and password protected [sparql end-point](http://www.w3.org/TR/sparql11-query/) 
 	full compliant with the last [W3C semantic web standards](http://www.w3.org/standards/semanticweb/).
-	You can create data mashup, apply rules, data inferences and many other features.
+	You can create data mashup, apply rules, data inferences and many other features. 
+	Last but not least LinkedData.Center keeps aligned your knowledge base with the data sources reindexing when needed.
 
-In this project I use the **demo** knowledge base that is available at https://hub1.linkeddata.center/ekb/demo/sparql endpoint.
+This project, by default, connects to the  **demo** knowledge base that is available at https://hub1.linkeddata.center/demo/sparql endpoint.
+You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
 
 
-The *demo* knoledge base is populated starting form a very simple configuration contained in
+The *demo* knoledge base is populated starting form a very simple configuration contained in the
 [Knowledge Exchange Engine Schema (KEES) file](pub/kees.ttl).
 For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://sites.linkeddata.center/help/devop/kees-profile). 
 
@@ -87,10 +89,10 @@ will return something like:
 
 [Try in demo site](http://autocomplete.linkeddata.center/api?term=am&list=3&lang=en).
 
-##The client side html code
+## The client side html code
 The Html source with all required javascript is contatined in [pub/index.html] file.
 
-##Reuse this approach
+## Reuse this approach
 Please note that you can extend this approach to query any data in billons of linked data sources
 (public or private) in just three steps:
 
@@ -100,10 +102,10 @@ Please note that you can extend this approach to query any data in billons of li
  
  To improve performances you can add cache at server side script.
 
-##Support
+## Support
 Where possible, I will try and provide support for this project, feel free to open an issue and I'll do my best to help.
 
-##Credits
+## Credits
 I have to thank a *lot* of awesome open source projects that were suggested by [BOTK](http://ontology.it/tools/botk) architecture:
 
  - BOTK  packages.
@@ -115,7 +117,7 @@ I have to thank a *lot* of awesome open source projects that were suggested by [
  
 And, of course, PHP and JQuery community.
 
-##License
+## License
 This project is licensed under the MIT licens, see here for the full license in LICENSE file.
 Find details and licenses of embedded software in the Vendor directory that will be created doring deploy process.
 
