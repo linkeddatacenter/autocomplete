@@ -1,3 +1,10 @@
+#######################################################################################
+# To  import thi knowledge piece in your LinkedData.Center the graph database instance
+# add following line to the configuration:
+#######################################################################################
+#[] kees:includes <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> .
+#######################################################################################
+
 @prefix kees: <http://linkeddata.center/kees/v1#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -9,10 +16,10 @@
 #######################################################
 <> 	dct:title "Knowledge base description for autocomplete demo project"@en ;
 	dct:description "A sharable description of a knowledge base that contains names of things (Automobiles, Rivers, Mammals etc) useful to add autocomple feature to form." ;
+	dct:isVersionOf <http://linkeddata.center/project/autocomplete/1.0.0/pub/kees.ttl> ;
 	dct:conformsTo <http://linkeddata.center/kees> ;
 	dct:subject <https://en.wikipedia.org/wiki/Autocomplete> ;
 	dct:license <http://creativecommons.org/licenses/by-sa/3.0/>;
-	dct:isVersionOf <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> ;
 	foaf:primaryTopic [ a kees:KnowledgeBase;
 		kees:hasAccrualPolicy _:a1, _:a2 ;
 		kees:hasView _:v1
@@ -21,12 +28,13 @@
 
 
 #######################################################
-# TBOX (schema) accrual policy:
+# TBOX  accrual policy:
 # not really necessary but clean
 #######################################################
 _:a1	
 	kees:queryName <http://dbpedia.org/ontology> ;
 	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
+	kees:generatesGraphType kees:TBoxGraph ;
 	kees:constructQuery """
 		PREFIX dbo: <http://dbpedia.org/ontology/>
 	    DESCRIBE ?class WHERE { VALUES ?class { dbo:Automobile dbo:River dbo:Mammal }  }
@@ -42,7 +50,6 @@ _:a1
 _:a2 
 	kees:queryName <urn:autocomplete:dbpedia> ;
 	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
-	kees:generatesGraphType kees:TBoxGraph ;
 	kees:constructQuery """
 		PREFIX dbo: <http://dbpedia.org/ontology/>
 		CONSTRUCT { ?url a ?class ; rdfs:label ?name }
