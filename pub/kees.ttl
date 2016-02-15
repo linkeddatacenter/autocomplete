@@ -1,6 +1,5 @@
 #######################################################################################
-# Add following line to the configuration of your LinkedData.Center graph db
-# to import last available  knowledge  description
+# LinkedData.Center users: just add following line to your graph db configuration
 #[] kees:includes <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> .
 #######################################################################################
 
@@ -25,25 +24,8 @@
 	]
 .
 
-
 #######################################################
-# TBOX  accrual policy:
-# not really necessary but clean
-#######################################################
-_:a1	
-	kees:queryName <http://dbpedia.org/ontology> ;
-	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
-	kees:generatesGraphType kees:TBoxGraph ;
-	kees:constructQuery """
-		PREFIX dbo: <http://dbpedia.org/ontology/>
-	    DESCRIBE ?class WHERE { VALUES ?class { dbo:Automobile dbo:River dbo:Mammal }  }
-	""" ;
-	kees:onFetchingError _:tryFourTimes ; kees:updateFrequency _:yearly ;
-.
-
-
-#######################################################
-# ABOX accrual policy:
+# Linked data accrual policy:
 # here you describe whath and how to grab from dbpedia
 #######################################################
 _:a2 
