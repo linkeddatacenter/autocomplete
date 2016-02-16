@@ -15,7 +15,7 @@ very general and frequent problem: autocomplete an input field selecting data fr
 Suppose that you want use jQueryUi autocomplete feature allowing the user to select one river in the world, and suppose that you want this list available
 in different languages. You got a big problem: to populate and maintain the big data set needed by the autocomplete script.
  
-Here is where the Semantic Web does the magic: you can use [Dbpedia](http://dbpedia.org) to access the full "Wisdom of the crowd" contained in Wikipedia and use it
+Here is where the Semantic Web does the magic: you can use Dbpedia to access the full "Wisdom of the crowd" contained in Wikipedia and use it
 	to get a list of all rivers, translated in any language!
 
 Dpedia is a great public service but unfortunately it does't ensure SLA, 
@@ -24,7 +24,7 @@ Dpedia is a great public service but unfortunately it does't ensure SLA,
 
 A reasonable solution is to copy the data you need from dbpedia to your own knowlege base system, so you can safely use it in your application. 
 
-This is where [linkeddata.center](http://linkeddata.center/) service plays its role. It allows you to quickly create and host a knowledge base populated 
+This is where LinkedData.Center service plays its role. It allows you to quickly create and host a knowledge base populated 
 from linked open data sources, from private data or from any combination of both. LinkedData.Centers exposes a dedicated and password protected sparql 
 end-point full compliant with the last W3C semantic web standards. You can create data mashup, apply rules, 
 data inferences and many other features. Last but not least LinkedData.Center keeps aligned your knowledge 
@@ -37,8 +37,8 @@ You can use your own LinkedData.Center instance ([free tiers available](http://l
 
 
 The *demo* knoledge base is populated starting from a 
-[Knowledge Exchange Engine Schema (KEES) file](pub/kees.ttl). This file is the core of the project.
-For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://sites.linkeddata.center/help/devop/kees-profile). 
+Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project.
+For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://linkeddata.center/help/devop/kees-profile). 
 
 ## Test in a local environment using Vagrant (suggested)
 
@@ -121,3 +121,4 @@ And, of course, PHP and JQuery community.
 ## License
 This project is licensed under the MIT license, in LICENSE file.
 
+Power by ![LinkedData.Center logo](http://cdn.rawgit.com/linkeddatacenter/resources/4.2.0/logo/Logo-nero-trasp2_oriz.png)
