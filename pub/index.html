@@ -39,7 +39,9 @@
 <h1>Autocomplete demo</h1>
 <p>
     This simple demo shows how to build an autocomplete solution using linked data
-    extracted from dbpedia by <a href="http://linkeddata.center/"> LinkedData.Center ingestion Apis</a>.<br>
+    extracted from <a href="http://dbpedia.org/">dbpedia</a> by <a href="http://linkeddata.center/">LinkedData.Center</a>.
+</p>
+<p>
     View project in <a href="https://github.com/linkeddatacenter/autocomplete">GitHub repository</a>.
 </p>
 <hr>
@@ -62,8 +64,8 @@
 <hr>
 <h3>Try the api interface:</h3>
 <form action="api" method="get">
-	api?lang=<input name="lang" value="en" size="2"/>
-	&amp;term=<input name="term" value="am"/>
+	api?term=<input name="term" value="am"/>
+	&amp;lang=<input name="lang" value="en" size="2"/>
 	&amp;class=<select name="class">
 			<option>Automobile</option>
 			<option>River</option>
@@ -77,9 +79,13 @@
 <h3>Try the data interface @ LinkedData.Center (username:demo password:demo):</h3>
 <ul>
 	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=River&amp;LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=River&amp;LIMIT=100</a></li>
-	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Mammals&amp;LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Mammals&amp;LIMIT=100</a></li>
+	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Mammal&amp;LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Mammal&amp;LIMIT=100</a></li>
 	<li><a href="https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&amp;LIMIT=100">https://hub1.linkeddata.center/demo/table/autocomplete:labels?DBO=Automobile&amp;LIMIT=100</a></li>
 	<li><a href="kees.ttl">Show knowledge base configuration</a></li>
 </ul>
+<hr>
+<footer>
+<p>Power by: <a href="http://linkeddata.center/"><img width ="200" src="http://linkeddata.center/resources/v4/logo/Logo-colori-trasp_oriz-640x220.png"></a></p>
+</footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# autocomplete project
+# Autocomplete project
 
 The objective of this project is to build a simple autocomplete feature based on data extracted from wikipedia.  
 See the [on-line demo](http://autocomplete.linkeddata.center/).
@@ -30,14 +30,20 @@ end-point full compliant with the last W3C semantic web standards. You can creat
 data inferences and many other features. Last but not least LinkedData.Center keeps aligned your knowledge 
 base with the data sources reindexing when needed.
 
-This project is composed by javascript/html page and a server script.
+## How it works
+
+This project is composed by javascript/html page, a server script and a knowledge base configuration.
 
 The  script, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
 You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
 
 
 The *demo* knoledge base is populated starting from a 
-Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project.
+Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. 
+If you want to use  your own knowledge base instance, you need to include this file in the graph-db configuration like as in the [demo knowledge base](http://hub1.linkeddata.center/demo/cpanel/config).
+
+In production environment do not link the master branch, instead use the preferred tagged version: e.g `[] kees:includes <http://linkeddata.center/project/autocomplete/1.0.0/pub/kees.ttl> .`
+
 For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://linkeddata.center/help/devop/kees-profile). 
 
 ## Test in a local environment using Vagrant (suggested)
@@ -121,4 +127,4 @@ And, of course, PHP and JQuery community.
 ## License
 This project is licensed under the MIT license, in LICENSE file.
 
-Power by ![LinkedData.Center logo](http://cdn.rawgit.com/linkeddatacenter/resources/4.2.0/logo/Logo-nero-trasp2_oriz.png)
+Power by ![LinkedData.Center logo](http://linkeddata.center/resources/v4/logo/Logo-colori-trasp_oriz-640x220.png)
