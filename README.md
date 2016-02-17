@@ -12,7 +12,7 @@ Wikipedia knowledge is distilled by [Dbpedia](http://dbpedia.org) and hosted by 
 Because is not always easy to understand the power of SPARQL and of Semantic Web technologies in day-by-day programming, I provided a simple example that solves a 
 very general and frequent problem: autocomplete an input field selecting data from a large dataset.
 
-Suppose that you want to write add an autocomplete script to help a user in writing the name of a river in the world in a form, and suppose that you want this this available in different languages. You face a big problem: populating and maintaining the big dataset needed to drive the script.
+Suppose that you want to write an autocomplete script to help a user in writing the name of a river in the world in a form, and suppose that you want this this available in different languages. You face a big problem: populating and maintaining the big dataset needed to drive the script.
  
 Here is where the Semantic Web does the magic: you can use Dbpedia to access the full "Wisdom of the crowd" contained in Wikipedia and use it
 	to get a list of all rivers, translated in any language!
