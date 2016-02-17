@@ -12,8 +12,7 @@ Wikipedia knowledge is distilled by [Dbpedia](http://dbpedia.org) and hosted by 
 Because is not always easy to understand the power of SPARQL and of Semantic Web technologies in day-by-day programming, I provided a simple example that solves a 
 very general and frequent problem: autocomplete an input field selecting data from a large dataset.
 
-Suppose that you want use jQueryUi autocomplete feature allowing the user to select one river in the world, and suppose that you want this list available
-in different languages. You got a big problem: to populate and maintain the big data set needed by the autocomplete script.
+Suppose that you want to write add an autocomplete script to help a user in writing the name of a river in the world in a form, and suppose that you want this this available in different languages. You face a big problem: populating and maintaining the big dataset needed to drive the script.
  
 Here is where the Semantic Web does the magic: you can use Dbpedia to access the full "Wisdom of the crowd" contained in Wikipedia and use it
 	to get a list of all rivers, translated in any language!
@@ -34,15 +33,17 @@ base with the data sources reindexing when needed.
 
 This project is composed by javascript/html page, a server script and a knowledge base configuration.
 
-The  script, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
+![schema](https://www.lucidchart.com/publicSegments/view/144858c7-c4c8-4c15-90e8-19f678841c44/image.png)
+
+The html page is a standard implementation of [jQueryUi remote autocomplete] (http://jqueryui.com/autocomplete#remote) javascript.
+
+The  server script is an API interface to the datasets, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
 You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
 
-
-The *demo* knoledge base is populated starting from a 
-Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. 
+The knoledge base is populated starting from a Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. Through this configuration dat the ingestion engine of LinkedData.Center cache neede dbpedia data, managing updates and dbpedia server failure.
 If you want to use  your own knowledge base instance, you need to include this file in the graph-db configuration like as in the [demo knowledge base](http://hub1.linkeddata.center/demo/cpanel/config).
 
-In production environment do not link the master branch, instead use the preferred tagged version: e.g `[] kees:includes <http://linkeddata.center/project/autocomplete/1.0.0/pub/kees.ttl> .`
+In production environment do not link the master branch, instead use the preferred tagged version: e.g `[] kees:includes <http://linkeddata.center/project/autocomplete/1.0.1/pub/kees.ttl> .`
 
 For more information about how to populate a knowledge base, please refer to [LinkedData.Center Knowledge base configuration handbook](http://linkeddata.center/help/devop/kees-profile). 
 
