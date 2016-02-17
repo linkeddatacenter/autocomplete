@@ -5,18 +5,23 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [changelog
 ## [Unreleased]
 
 ## [1.0.2]
+
 ### Changed
 - license file.
+
 ### Fixed
 - typos in docs
 
 ## [1.0.1]
+
 ### Changed
 - added power by in readme and html file.
+
 ### Fixed
 - Broken link in data interface listing
 
 ## 1.0.0
+
 ### Changed
 - aligned to KEES 1.1 language profile
 - moved to ttps://github.com/linkeddatacenter/autocomplete
@@ -26,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [changelog
 - kees knowlege base description
 
 ## 0.1.0 - 2015-09-04 
+
 ### Added
 - Initial release available in https://github.com/ecow/ldcdemo
 
