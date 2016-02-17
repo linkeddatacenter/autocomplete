@@ -1,6 +1,6 @@
 #######################################################################################
 # LinkedData.Center users: just add following line to your graph db configuration
-#[] kees:includes <http://linkeddata.center/project/autocomplete/master/pub/kees.ttl> .
+#[] kees:includes <http://linkeddata.center/project/autocomplete/1.x.x/pub/kees.ttl> .
 #######################################################################################
 
 @prefix kees: <http://linkeddata.center/kees/v1#> .
@@ -19,16 +19,16 @@
 	dct:subject <https://en.wikipedia.org/wiki/Autocomplete> ;
 	dct:license <http://creativecommons.org/licenses/by-sa/3.0/>;
 	foaf:primaryTopic [ a kees:KnowledgeBase;
-		kees:hasAccrualPolicy _:a1, _:a2 ;
-		kees:hasView _:v1
+		kees:hasAccrualPolicy _:dbpedia;
+		kees:hasView _:labels
 	]
 .
 
 #######################################################
-# Linked data accrual policy:
+# Dbpedia data accrual policy:
 # here you describe whath and how to grab from dbpedia
 #######################################################
-_:a2 
+_:dbpedia 
 	kees:queryName <urn:autocomplete:dbpedia> ;
 	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
 	kees:constructQuery """
@@ -45,9 +45,9 @@ _:a2
 
 	
 ##########################################################
-# Knowledge fragments
+# Data views
 ##########################################################
-_:v1 
+_:labels 
 	a kees:Table ;
 	dct:identifier "autocomplete:labels" ;
 	rdfs:label "Names for autocomplention from dbpedia ontology " ;
@@ -62,7 +62,5 @@ _:v1
 	"""
 .
 
-
-_:yearly kees:hasFrequencyPeriod 31104000 .
 _:montly kees:hasFrequencyPeriod 2592000 .
 _:tryFourTimes kees:hasResilience 4 .
