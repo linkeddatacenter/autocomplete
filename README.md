@@ -40,8 +40,13 @@ The html page is a standard implementation of [jQueryUi remote autocomplete] (ht
 The  server script is an API interface to the datasets, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
 You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
 
-The knoledge base is populated starting from a Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. Through this configuration dat the ingestion engine of LinkedData.Center cache neede dbpedia data, managing updates and dbpedia server failure.
-If you want to use  your own knowledge base instance, you need to include this file in the graph-db configuration like as in the [demo knowledge base](http://hub1.linkeddata.center/demo/cpanel/config).
+The knoledge base is populated starting from a Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. Through this configuration the ingestion engine of LinkedData.Center cache all needed dbpedia data, managing updates and dbpedia server failure.
+If you want to use your own knowledge base instance, you need just to add following line to  your  graph-db configuration:
+
+```
+	@prefix kees: <http://linkeddata.center/kees/v1#> .
+	[] kees:includes <http://autocomplete.linkeddata.center/kees.ttl> .
+```
 
 In production environment do not link the master branch, instead use the preferred tagged version: e.g `[] kees:includes <http://linkeddata.center/project/autocomplete/1.0.1/pub/kees.ttl> .`
 
