@@ -26,9 +26,10 @@
 
 #######################################################
 # Dbpedia data accrual policy:
-# here you describe whath and how to grab from dbpedia
+# here you describe what and how to grab from dbpedia
 #######################################################
 _:dbpedia 
+	rdfs:comment "Imports labels of automobiles, rivers and mammals from dbpedia, beeing resilent to network errors"@en ;
 	kees:queryName <urn:autocomplete:dbpedia> ;
 	kees:sparqlEndpoint <http://dbpedia.org/sparql> ;
 	kees:constructQuery """
@@ -45,13 +46,13 @@ _:dbpedia
 
 	
 ##########################################################
-# Data views
+# Ppredefined sparql query
 ##########################################################
 _:labels 
 	a kees:Table ;
 	dct:identifier "autocomplete:labels" ;
-	rdfs:label "Names for autocomplention from dbpedia ontology " ;
-	rdfs:comment "Accepts parameters DBO=Automobile|River|Mammal LANG=en, MATCH=.*, LIMIT=5" ;
+	rdfs:label "Names from dbpedia ontology"@en ;
+	rdfs:comment "Accepts parameters DBO=Automobile|River|Mammal LANG=en, MATCH=.*, LIMIT=5"@en ;
 	kees:queryText """
 		PREFIX dbo: <http://dbpedia.org/ontology/>
 		SELECT  ?label ?url FROM <urn:autocomplete:dbpedia>
