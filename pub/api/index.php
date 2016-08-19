@@ -6,7 +6,7 @@ use BOTK\Context\ContextNameSpace as V;
 
 class AutocompleteController extends \BOTK\Core\EndPoint {
 	// Here LinkedData.Center credentials
-	const ENDPOINT = 'https://hub1.linkeddata.center/';
+	const ENDPOINT = 'http://pub.linkeddata.center/';
 	const KID = 'demo';
 	const SECRET = 'demo';
 
