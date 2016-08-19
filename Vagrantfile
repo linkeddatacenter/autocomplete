@@ -1,8 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# elinux/v01642 is 
-VBOX         = "ubuntu/trusty32" #just a plain ubuntu 14.04 server, fill free to change with ypur preferred distribution.
+VBOX         = "ubuntu/trusty32" #just a plain ubuntu 14.04 server, fill free to change with your preferred distribution.
 VBOX_MEMORY  = 640
 LOCALPORT	 = 8080			   # change this if already in use
 
