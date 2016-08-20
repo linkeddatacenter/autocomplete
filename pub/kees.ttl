@@ -46,7 +46,7 @@ _:dbpedia
 
 	
 ##########################################################
-# Ppredefined sparql query
+# Predefined sparql queries
 ##########################################################
 _:labels 
 	a kees:Table ;
