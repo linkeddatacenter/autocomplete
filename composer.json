@@ -1,8 +1,7 @@
 {
     "require": {
         "php": ">=5.5",
-        "botk/core": "*",
-        "botk/context": "*",
-    	"botk/rdf": "*"
+        "silex/silex": "~2.0",
+        "guzzlehttp/guzzle": "~6.2"
     }
 }

@@ -1,55 +1,55 @@
 <?php
 require '../../vendor/autoload.php';
 
-use BOTK\Context\Context;
-use BOTK\Context\ContextNameSpace as V;
+use Symfony\Component\HttpFoundation\Request;
+use Silex\Application;
 
-class AutocompleteController extends \BOTK\Core\EndPoint {
-	// Here LinkedData.Center credentials
-	const ENDPOINT = 'http://pub.linkeddata.center/';
-	const KID = 'demo';
-	const SECRET = 'demo';
+$app = new Application;
+#$app['debug'] = true; // enable this to get error description
+($app['endpoint']=getenv('LDC_ENDPOINT'))||($app['endpoint']='http://pub.linkeddata.center/demo/sparql');
+($app['user']=getenv('LDC_USER'))||($app['user']='demo');
+($app['password']=getenv('LDC_PASSWORD'))||($app['password']='demo');
 
-	protected function setRoutes() {
-		$this -> get('/', function() {
 
-			// fetch and validate inputs
-			$ns = Context::factory() -> ns(INPUT_GET);
-			$class = $ns -> getValue('class', 'Automobile', V::ENUM('Automobile|River|Mammal'));
-			$term = $ns -> getValue('term', V::MANDATORY, V::STRING('/.{2,}/'), FILTER_SANITIZE_STRING);
-			$lang = $ns -> getValue('lang', 'en', null, FILTER_SANITIZE_STRING);
-			$list = $ns -> getValue('list', 10, V::POSITIVE_INT(), FILTER_SANITIZE_NUMBER_INT);
+$app->get('/', function( Request $request, Application $app) {
+	
+	// get paramethers from querystring
+	$class 	= filter_var( $request->query->get('class', 'Automobile'),FILTER_SANITIZE_STRING);
+	$term 	= filter_var( $request->query->get('term',''),FILTER_SANITIZE_STRING);
+	$lang 	= filter_var( $request->query->get('lang', 'en'),FILTER_SANITIZE_STRING);
+	$list 	= filter_var( $request->query->get('list', 10),FILTER_SANITIZE_NUMBER_INT);
+	
+	if(strlen($term)<2) { $app->abort(400,'Search  lengh must be at least 2 char.');}
+	if( $list < 1)  { $app->abort(400,'List must be non negative.');}
+	
+	// Prepare a SPARQL query
+	$sparqlQuery = "
+		PREFIX dbo: <http://dbpedia.org/ontology/>
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		SELECT ?label FROM <urn:autocomplete:dbpedia> 
+		WHERE {
+			?s a dbo:$class ;rdfs:label ?label .
+			FILTER(LANGMATCHES(LANG(?label), '$lang') && REGEX(?label, '^$term','i'))
+		} LIMIT $list
+	";
+	
+	// Call sparql endpoint and get data
+	$client = new GuzzleHttp\Client();
+	$res = $client->request('POST', $app['endpoint'], array(
+    	'auth' => array($app['user'], $app['password']),
+    	'headers' => array(
+    		'Content-Type' => 'application/sparql-query',
+    		'Accept' => 'text/csv',
+		),
+		'body' => $sparqlQuery
+	));
+	
+	// format results as required by app
+	$resultAsArray = explode("\n",trim((string) $res->getBody()));
+	array_shift($resultAsArray); // skips headers
+	
+	return $app->json($resultAsArray);
+	
+});
 
-			\BOTK\RDF\HttpClient::useIdentity(self::KID, self::SECRET);
-			$sparql = new EasyRdf_Sparql_Client(self::ENDPOINT . self::KID . '/sparql');
-
-			// define sparql query
-			$query = "
-				PREFIX dbo: <http://dbpedia.org/ontology/>
-				PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-				SELECT ?label FROM <urn:autocomplete:dbpedia> 
-				WHERE {
-					?s a dbo:$class ;rdfs:label ?label .
-					FILTER(LANGMATCHES(LANG(?label), '$lang') && REGEX(?label, '^$term','i'))
-				} LIMIT $list
-			";
-			$solutions = $sparql -> query($query);
-
-			// create a simple json array from retrived solutions
-			$result = array();
-			foreach ($solutions as $row) {
-				$result[] = $row -> label -> getValue();
-			}
-
-			// return the result as a Json representation
-			return json_encode($result, JSON_PRETTY_PRINT);
-		});
-	}
-
-}
-
-try {
-	echo \BOTK\Core\EndPointFactory::make('AutocompleteController') -> run();
-} catch ( Exception $e) {
-	echo \BOTK\Core\ErrorManager::getInstance() -> render($e);
-}
+$app->run();

@@ -3,7 +3,7 @@
 The objective of this project is to build a simple autocomplete feature based on data extracted from wikipedia.  
 See the [on-line demo](http://autocomplete.linkeddata.center/).
 
-The html/javascript part is based on [jQueryUI autocomplete](http://jqueryui.com/autocomplete/), the server script is based on [BOTK](https://github.com/linkeddatacenter/BOTK-core) library.
+The html/javascript part is based on [jQueryUI autocomplete](http://jqueryui.com/autocomplete/), the server script is based on [Silex](http://silex.sensiolabs.org/) microframework.
 Wikipedia knowledge is distilled by [Dbpedia](http://dbpedia.org) and hosted by [LinkedData.Center](http://linkeddata.center/).
 
 
@@ -37,10 +37,11 @@ This project is composed by javascript/html page, a server script and a knowledg
 
 The html page is a standard implementation of [jQueryUi remote autocomplete] (http://jqueryui.com/autocomplete#remote) javascript.
 
-The  server script is an API interface to the datasets, by default, connects to  https://hub1.linkeddata.center/demo/sparql endpoint. 
-You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code.
+The  server script is an API interface to the datasets, by default, connects to  http://pub.linkeddata.center/demo/sparql endpoint. 
+You can use your own LinkedData.Center instance ([free tiers available](http://linkeddata.center/home/pricing#cta)) just changing credentials in the api code or setting environment variables **LDC_ENDPOINT**, **LDC_USER**, **LDC_PASSWORD**)
 
-The knoledge base is populated starting from a Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. Through this configuration the ingestion engine of LinkedData.Center cache all needed dbpedia data, managing updates and dbpedia server failure.
+The knoledge base is populated starting from a Knowledge Exchange Engine Schema (KEES) file (find it in pub/kees.ttl). This file is the core of the project. 
+Through this configuration the ingestion engine of LinkedData.Center cache all needed dbpedia data, managing updates and dbpedia server failure.
 If you want to use your own knowledge base instance, you need just to add following line to  your  graph-db configuration:
 
 ```
@@ -62,7 +63,7 @@ These instructions allow you to install and test the project on your local works
 - point your browser to http://localhosts:8080/demo .
 - to destroy your virtual host just type `vagrant destroy`
 
-You should get locally the same results available in [E-Artspace demo site](http://autocomplete.linkeddata.center/).
+You should get locally the same results available in [demo site](http://autocomplete.linkeddata.center/).
  
 ## Install on your PHP web server
 
